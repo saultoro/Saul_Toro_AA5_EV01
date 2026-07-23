@@ -1,63 +1,27 @@
 // Importar librerías
 const express = require('express');
+const conductoresRoutes = require("./routes/conductores");
+const vehiculosRoutes = require("./routes/vehiculos");
+const viajesRoutes = require("./routes/viajes");
+const pagosRoutes = require("./routes/pagos");
 const cors = require('cors');
 
 // Crear aplicación
 const app = express();
 
-// Permitir recibir JSON
+// Configuración
 app.use(express.json());
 app.use(cors());
 
-// Lista temporal de usuarios
-let usuarios = [];
+// Importar rutas
+const usuariosRoutes = require('./routes/usuarios');
 
-/*
- Registro de usuario
-*/
-app.post('/registro', (req, res) => {
-
-    const { usuario, password } = req.body;
-
-    usuarios.push({
-        usuario,
-        password
-    });
-
-    res.json({
-        mensaje: 'Usuario registrado correctamente'
-    });
-
-});
-
-/*
- Inicio de sesión
-*/
-app.post('/login', (req, res) => {
-
-    const { usuario, password } = req.body;
-
-    const existe = usuarios.find(
-        u =>
-        u.usuario === usuario &&
-        u.password === password
-    );
-
-    if (existe) {
-
-        res.json({
-            mensaje: 'Autenticación satisfactoria'
-        });
-
-    } else {
-
-        res.status(401).json({
-            mensaje: 'Error en la autenticación'
-        });
-
-    }
-
-});
+// Usar las rutas
+app.use('/', usuariosRoutes);
+app.use("/conductores", conductoresRoutes);
+app.use("/vehiculos", vehiculosRoutes);
+app.use("/viajes", viajesRoutes);
+app.use("/pagos", pagosRoutes);
 
 // Iniciar servidor
 app.listen(3000, () => {

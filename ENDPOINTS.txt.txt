@@ -1,0 +1,30 @@
+API DE AUTENTICACIÓN
+
+1. Registro de usuario
+
+Método: POST
+
+URL:
+http://localhost:3000/registro
+
+Body:
+
+{
+  "usuario": "saul",
+  "password": "12345"
+}
+
+
+2. Inicio de sesión
+
+Método: POST
+
+URL:
+http://localhost:3000/login
+
+Body:
+
+{
+  "usuario": "saul",
+  "password": "12345"
+}
